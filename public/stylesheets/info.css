@@ -1,0 +1,101 @@
+.userHeading{
+    font-size: 22px;
+}
+
+
+.pieWrapper p{
+text-align: center;
+   
+}
+
+.pieWrapper{
+ display: inline-block;
+ margin-right: 200px;
+}
+
+.assetPieChart{
+    width: 400px;
+    height: 400px;
+}
+
+
+.graphsWrapper{
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.graphsWrapper2{
+    display: flex;
+    margin-top: 100px;
+    /* justify-content: space-between; */
+}
+.graphsWrapper p{
+    text-align: center;
+}
+
+.row{
+    display: flex;
+   margin-top: 10px;
+}
+
+.bankAccounts p{
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: left;
+
+}
+.bankAccounts{
+    /* margin-top: 100px; */
+}
+.row span{
+    margin-right: 80px;
+    width: 120px;
+    font-weight: 300;
+}
+.columnNames{
+    
+  display: flex;
+    margin-bottom: 10px;
+ 
+}
+.columnNames span{
+    margin-right: 95px;
+
+    font-size: 1.2rem;
+    font-weight: 500 !important;
+}
+
+
+.transactions .columnNames span{
+width: 107px;  
+  font-size: 1.1rem;
+   
+}
+.columnNames span:nth-child(2){
+    margin-right: 90px;
+}
+.barWrapper{
+    /* margin-top: 100px; */
+}
+
+.assetBarChart{
+    width: 400px;
+    height: 400px;
+}
+
+.monthlyExpense{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.monthlyChart{
+    width: 50%;
+}
+
+.netWorth{
+    text-align: center;
+    margin-top: 100px;
+}
