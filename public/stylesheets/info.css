@@ -10,7 +10,7 @@ text-align: center;
 
 .pieWrapper{
  display: inline-block;
- margin-right: 200px;
+ margin-right: 20%;
 }
 
 .assetPieChart{
@@ -71,6 +71,9 @@ width: 107px;
 }
 .columnNames span:nth-child(2){
     margin-right: 90px;
+}
+.barWrapper p{
+    text-align: center;
 }
 
 .assetBarChart{

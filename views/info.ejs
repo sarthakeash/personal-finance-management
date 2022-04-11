@@ -1,271 +1,221 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../stylesheets/fonts.css" />
-    <link rel="stylesheet" href="../stylesheets/home.css" />
-    <link rel="stylesheet" href="../stylesheets/header.css" />
-    <link rel="stylesheet" href="../stylesheets/info.css">
-    <title>User Info</title>
-</head>
-<body>
-    <header id="header"><%- include("header.ejs") %></header>
-<div class="homeWrapper">
-<p class="userHeading">Sarthak Arora's Financial Overview</p>
+      <head>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1.0"
+            />
+            <link rel="stylesheet" href="../stylesheets/fonts.css" />
+            <link rel="stylesheet" href="../stylesheets/home.css" />
+            <link rel="stylesheet" href="../stylesheets/header.css" />
+            <link rel="stylesheet" href="../stylesheets/info.css" />
+            <title>User Info</title>
+      </head>
+      <body>
+            <header id="header"><%- include("header.ejs") %></header>
+            <div class="homeWrapper">
+                  <p class="userHeading">
+                        <%=name[0].name%>'s Financial Overview
+                  </p>
 
+                  <div class="graphsWrapper">
+                        <div class="pieWrapper">
+                              <p>Asset Distribution</p>
+                              <div class="assetPieChart" data-owns-gold= <%= owns[0].asset_value %> >
+                                    <canvas
+                                          id="myChart"
+                                          width="100"
+                                          height="100"
+                                    ></canvas>
+                              </div>
+                        </div>
 
-<div class="graphsWrapper">
+                        <div class="bankAccounts">
+                              <p>Bank Account Details</p>
 
-<div class="pieWrapper">
+                              <div class="bankWrapper">
+                                    <div class="columnNames">
+                                          <span>Bank Name</span>
+                                          <span>Account No.</span>
+                                          <span>Balance</span>
+                                    </div>
+                                    <% accounts.forEach(function(account){ %>
+                                    <div class="row">
+                                          <span><%= account.bank %></span>
+                                          <span><%= account.accNo %></span>
+                                          <span><%= account.balance %></span>
+                                    </div>
+                                    <% }); %>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="graphsWrapper2">
+                        <div class="bankAccounts transactions">
+                              <p>Last few transactions</p>
 
-    <p>Asset Distribution</p>
-<div class="assetPieChart">
-    <canvas id="myChart" width="100" height="100"></canvas>
-  </div>
-   
-</div>
+                              <div class="bankWrapper">
+                                    <div class="columnNames">
+                                          <span>Bank Name</span>
+                                          <span>Account No.</span>
+                                          <span>Nature</span>
+                                          <span>Amount</span>
+                                    </div>
+                                    <%
+                                    transactions.forEach(function(transaction){
+                                    %>
+                                    <div class="row">
+                                          <span><%= transaction.bank %></span>
+                                          <span><%= transaction.accNo %></span>
+                                          <span
+                                                ><%=
+                                                (transaction.isCredit==1)?("Credit"):("Debit")
+                                                %></span
+                                          >
+                                          <span><%= transaction.amount %></span>
+                                    </div>
+                                    <% }); %>
+                              </div>
+                        </div>
 
+                        <div class="barWrapper">
+                              <p>Weekly Expenses</p>
+                              <div class="assetBarChart">
+                                    <canvas
+                                          id="myChart1"
+                                          width="400"
+                                          height="400"
+                                    ></canvas>
+                              </div>
+                        </div>
+                  </div>
 
-<div class="bankAccounts">
-  <p>Bank Account Details</p>
+                  <div class="monthlyExpense">
+                        <p>Monthly Expenses</p>
+
+                        <div class="monthlyChart">
+                              <canvas
+                                    id="myChart2"
+                                    width="100"
+                                    height="100"
+                              ></canvas>
+                        </div>
+                  </div>
+
+                  <div class="netWorth">
+                        <h2>Net Worth is $ <%=netWorth[0].net_worth %></h2>
+                  </div>
+            </div>
+
+            <footer id="footer"><%- include("footer.ejs") %></footer>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                  var owns='<%-JSON.stringify(owns)%>';
+                 owns=JSON.parse(owns)
   
-  <div class="bankWrapper">
-  <div class="columnNames">
-  <span>Bank Name</span>
-  <span>Account No.</span>
-  <span>Balance</span>
-  
-  </div>
-  <div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div>
-  <div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div><div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div><div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div><div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div><div class="row">
-      <span>Axis</span>
-      <span>1245678788</span>
-      <span>1234</span>  
-  </div>
-  </div>
-  
-  
-  </div>
+                 console.log(owns);
+                 const labels = [owns[0]["asset_class"], owns[1]["asset_class"], owns[2]["asset_class"],owns[3]["asset_class"]];
 
+                  const data = {
+                        labels: labels,
+                        datasets: [
+                              {
+                                    label: "Assets distribution",
+                                    backgroundColor: [
+                                          "rgb(255, 99, 132)",
+                                          "rgb(54, 162, 235)",
+                                          "rgb(255, 205, 86)",
+                                          "rgb(255, 05, 86)",
+                                    ],
+                                    borderColor: "rgb(0,0,0)",
+                                    data: [owns[0]["asset_value"], owns[1]["asset_value"], owns[2]["asset_value"], owns[3]["asset_value"]],
+                              },
+                        ],
+                  };
 
+                  const config = {
+                        type: "doughnut",
+                        data: data,
+                        options: {},
+                  };
 
+                  const myChart = new Chart(
+                        document.getElementById("myChart"),
+                        config
+                  );
 
+                  const labels1 = ["week 1", "week 2", "week 3", "week 4"];
+                  const data1 = {
+                        labels: labels1,
+                        datasets: [
+                              {
+                                    label: "Weekly Expenses",
+                                    data: [65, 59, 80, 81],
+                                    backgroundColor: [
+                                          "rgba(255, 99, 132, 0.2)",
+                                          "rgba(255, 159, 64, 0.2)",
+                                          "rgba(255, 205, 86, 0.2)",
+                                          "rgba(75, 192, 192, 0.2)",
+                                    ],
+                                    borderColor: [
+                                          "rgb(255, 99, 132)",
+                                          "rgb(255, 159, 64)",
+                                          "rgb(255, 205, 86)",
+                                          "rgb(75, 192, 192)",
+                                    ],
+                                    borderWidth: 1,
+                              },
+                        ],
+                  };
 
+                  const config1 = {
+                        type: "bar",
+                        data: data1,
+                        options: {
+                              scales: {
+                                    y: {
+                                          beginAtZero: true,
+                                    },
+                              },
+                        },
+                  };
 
-</div>
-<div class="graphsWrapper2">
-  <div class="bankAccounts transactions">
-    <p>Last few transactions</p>
-    
-    <div class="bankWrapper">
-    <div class="columnNames">
-    <span>Bank Name</span>
-    <span>Account No.</span>
-    <span>Nature</span>
-    <span>Amount</span>
-    
-    </div>
-    <div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span>  
-        <span>1234</span>  
+                  const myChart1 = new Chart(
+                        document.getElementById("myChart1"),
+                        config1
+                  );
 
-    </div>
-    <div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span>  
-        <span>1234</span>  
-        
-    </div><div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span>  
-        <span>1234</span>  
+                  const labels2 = [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                  ];
 
-    </div><div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span> 
-        <span>1234</span>  
+                  const data2 = {
+                        labels: labels2,
+                        datasets: [
+                              {
+                                    label: "Monthly Expense",
+                                    data: [65, 59, 80, 81, 56, 55, 40],
+                                    backgroundColor: "rgb(255, 99, 132)",
+                                    borderColor: "rgb(255, 99, 132)",
+                              },
+                        ],
+                  };
+                  const config2 = {
+                        type: "line",
+                        data: data2,
+                  };
 
-    </div><div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span>  
-        <span>1234</span>  
-
-    </div><div class="row">
-        <span>Axis</span>
-        <span>1245678788</span>
-        <span>1234</span>  
-        <span>1234</span>  
-
-    </div>
-    </div>
-    
-    
-    </div>
-  
-
-
-<div class="barWrapper">
-  <p>Weekly Expenses</p>
-<div class="assetBarChart">
-  <canvas id="myChart1" width="400" height="400"></canvas>
-</div>
-
-</div>
-</div>
-  
-
-<div class="monthlyExpense">
-  <p>Monthly Expenses</p>
-
-
-  <div class="monthlyChart">
-    <canvas id="myChart2" width="100" height="100"></canvas>
-  </div>
-</div>
-
-
-<div class="netWorth">
-
-  <h2>Net Worth is $ 240000</h2>
-</div>
-
-
-</div>
-
-    <footer id="footer"><%- include("footer.ejs") %></footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-
-const labels = [
-    'Car',
-    'Jewellery',
-    'Real Estate',
-    'Stocks',
-  ];
-
-  const data = {
-    labels: labels,
-    datasets: [{
-      label: 'Assets distribution',
-      backgroundColor: ['rgb(255, 99, 132)','rgb(54, 162, 235)',
-      'rgb(255, 205, 86)', 'rgb(255, 05, 86)'],
-      borderColor: 'rgb(0,0,0)',
-      data: [200,500,800,100],
-    }]
-  };
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {}
-  };
-
-
-
-
-
-  const labels1 = [
-      'week 1', 'week 2', 'week 3', 'week 4'
-  ]
-const data1 = {
-  labels: labels1,
-  datasets: [{
-    label: 'Weekly Expenses',
-    data: [65, 59, 80, 81],
-    backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(255, 205, 86, 0.2)',
-      'rgba(75, 192, 192, 0.2)',
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(255, 205, 86)',
-      'rgb(75, 192, 192)',
-    ],
-    borderWidth: 1
-  }]
-};
-
-
-const config1 = {
-  type: 'bar',
-  data: data1,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  },
-};
-
-
-
-const labels2 =   ['January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June','July']
-
-const data2 = {
-  labels: labels2,
-  datasets: [{
-    label: 'Monthly Expense',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
-  }]
-};
-const config2 = {
-  type: 'line',
-  data: data2,
-};
-
-  const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
-
-  const myChart1 = new Chart(
-    document.getElementById('myChart1'),
-    config1
-  );
-
-  const myChart2 = new Chart(
-    document.getElementById('myChart2'),
-    config2
-  );
-</script>
-</body>
+                  const myChart2 = new Chart(
+                        document.getElementById("myChart2"),
+                        config2
+                  );
+            </script>
+      </body>
 </html>

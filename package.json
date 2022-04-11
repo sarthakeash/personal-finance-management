@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/sarthakeash/personal-finance-management#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "ejs": "^3.1.6",
+    "ejs-lint": "^1.2.1",
     "express": "^4.17.3",
     "livereload": "^0.9.3",
     "mysql": "^2.18.1",
