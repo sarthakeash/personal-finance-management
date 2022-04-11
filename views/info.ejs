@@ -145,24 +145,42 @@
                         config
                   );
 
-                  const labels1 = ["week 1", "week 2", "week 3", "week 4"];
+                  var weekly='<%-JSON.stringify(weekly_expense)%>';
+                 weekly=JSON.parse(weekly)
+
+var newArr=[];
+for (let index = 0; index < weekly.length; index++) {
+   newArr.push(weekly[index].expense)
+}
+for (let index = 0; index < 7- weekly.length; index++) {
+   newArr.push(0)
+}
+
+console.log(newArr);
+                  const labels1 = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
                   const data1 = {
                         labels: labels1,
                         datasets: [
                               {
                                     label: "Weekly Expenses",
-                                    data: [65, 59, 80, 81],
+                                    data: newArr,
                                     backgroundColor: [
                                           "rgba(255, 99, 132, 0.2)",
                                           "rgba(255, 159, 64, 0.2)",
                                           "rgba(255, 205, 86, 0.2)",
                                           "rgba(75, 192, 192, 0.2)",
+                                          "rgba(75, 132, 162, 0.2)",
+                                          "rgba(75, 19, 192, 0.2)",
+                                          "rgba(95, 192, 12, 0.2)"
                                     ],
                                     borderColor: [
                                           "rgb(255, 99, 132)",
                                           "rgb(255, 159, 64)",
                                           "rgb(255, 205, 86)",
                                           "rgb(75, 192, 192)",
+                                          "rgb(75, 12, 192)",
+                                          "rgb(75, 19, 92)",
+                                          "rgb(40, 192, 12)"
                                     ],
                                     borderWidth: 1,
                               },
@@ -186,14 +204,15 @@
                         config1
                   );
 
+
+                  var monthly_expense='<%-JSON.stringify(monthly_expense)%>';
+                  monthly_expense=JSON.parse(monthly_expense)
+                  console.log(monthly_expense);
                   const labels2 = [
-                        "January",
-                        "February",
-                        "March",
-                        "April",
-                        "May",
-                        "June",
-                        "July",
+                        "This Week",
+                        "Last Week",
+                        "Third Week",
+                        "Fourth Week",
                   ];
 
                   const data2 = {
@@ -201,7 +220,7 @@
                         datasets: [
                               {
                                     label: "Monthly Expense",
-                                    data: [65, 59, 80, 81, 56, 55, 40],
+                                    data: [monthly_expense.week1||200, monthly_expense.week2||300, monthly_expense.week3||1400, monthly_expense.week4||900],
                                     backgroundColor: "rgb(255, 99, 132)",
                                     borderColor: "rgb(255, 99, 132)",
                               },
