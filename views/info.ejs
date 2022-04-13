@@ -116,7 +116,7 @@
                  owns=JSON.parse(owns)
   
                  console.log(owns);
-                 const labels = [owns[0]["asset_class"], owns[1]["asset_class"], owns[2]["asset_class"],owns[3]["asset_class"]];
+                 const labels = [owns[0]["asset_class"]||"Car", owns[1]["asset_class"]||"Stocks", owns[2]["asset_class"]||"Jewellery",owns[3]["asset_class"] || "Property"];
 
                   const data = {
                         labels: labels,
@@ -130,7 +130,7 @@
                                           "rgb(255, 05, 86)",
                                     ],
                                     borderColor: "rgb(0,0,0)",
-                                    data: [owns[0]["asset_value"], owns[1]["asset_value"], owns[2]["asset_value"], owns[3]["asset_value"]],
+                                    data: [owns[0]["asset_value"] || 0, owns[1]["asset_value"] || 0, owns[2]["asset_value"] || 0, owns[3]["asset_value"]|| 0],
                               },
                         ],
                   };
