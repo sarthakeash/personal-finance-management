@@ -8,11 +8,13 @@
       </head>
 
       <body>
+        <!-- the header component -->
             <header id="header"><%- include("header.ejs") %></header>
             <div class="homeWrapper">
                   <div class="mainHeading">
                         Click on the user to get the their financial info
                   </div>
+                  <!-- the user card wrapper -->
                   <div class="userCardWrapper">
 
                         <% users.forEach(function(user){ %>
@@ -20,7 +22,7 @@
                                     <div class="userCard">
                                           <div class="userImg">
                                                 <img
-                                                      src="https://i.pravatar.cc/150?img=11"
+                                                      src="https://i.pravatar.cc/150?img=<%= user.aadharNo.toString().substring(10,12) %>"
                                                       alt=""
                                                 />
                                           </div>
@@ -36,7 +38,7 @@
 
                   </div>
             </div>
-
+<!-- the footer component -->
             <footer id="footer"><%- include("footer.ejs") %></footer>
       </body>
 </html>
